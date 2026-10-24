@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الأرض الحزينة — فيديو</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(circle at 50% 0%,#0d1b3a 0%,#050912 70%);color:#eaf2ff;
+       font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;min-height:100vh;
+       display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;gap:18px}
+  h1{font-size:20px;font-weight:700;letter-spacing:.2px;text-align:center}
+  .sub{font-size:13px;color:#8fb0d8;text-align:center;line-height:1.7;max-width:420px}
+  .phone{width:min(92vw,380px);aspect-ratio:9/16;border-radius:22px;overflow:hidden;
+         background:#000;box-shadow:0 26px 70px rgba(40,120,255,.28),0 0 0 1px rgba(120,180,255,.22);position:relative}
+  video{width:100%;height:100%;display:block;object-fit:cover;background:#000}
+  .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  a.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:999px;
+        font-size:14px;font-weight:600;text-decoration:none;color:#06101f;
+        background:linear-gradient(180deg,#ffe9b8,#d8a856);box-shadow:0 8px 22px rgba(216,168,86,.35)}
+  a.ghost{background:rgba(120,180,255,.12);color:#cfe4ff;box-shadow:none;border:1px solid rgba(120,180,255,.35)}
+  .note{font-size:11.5px;color:#6784a8;text-align:center;max-width:420px;line-height:1.8}
+  .play{position:absolute;inset:0;display:grid;place-items:center;background:rgba(4,10,22,.55);
+        backdrop-filter:blur(2px);cursor:pointer;transition:opacity .3s}
+  .play.hide{opacity:0;pointer-events:none}
+  .play span{width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.14);
+             border:2px solid rgba(255,255,255,.65);display:grid;place-items:center}
+  .play span::after{content:"";border-style:solid;border-width:15px 0 15px 26px;
+             border-color:transparent transparent transparent #fff;margin-right:-6px}
+</style>
+</head>
+<body>
+  <h1>الأرض الحزينة</h1>
+  <p class="sub">فيلم قصير — ١٠ ثوانٍ · عمودي ٩:١٦ · موسيقى أصلية</p>
+
+  <div class="phone">
+    <video id="v" playsinline preload="metadata" poster="poster.jpg"
+           src="https://cdn.jsdelivr.net/gh/anthymkhmlyt41-ship-it/uploaded-image@master/earth-film/earth_sad_light.mp4"></video>
+    <div class="play" id="p"><span></span></div>
+  </div>
+
+  <div class="row">
+    <a class="btn" href="https://cdn.jsdelivr.net/gh/anthymkhmlyt41-ship-it/uploaded-image@master/earth-film/earth_sad_light.mp4" download>تحميل النسخة الخفيفة (١.٢ م.ب)</a>
+    <a class="btn ghost" href="https://cdn.jsdelivr.net/gh/anthymkhmlyt41-ship-it/uploaded-image@master/earth-film/earth_sad_10s.mp4" download>الجودة الكاملة (٨.٧ م.ب)</a>
+  </div>
+
+  <p class="note">إن لم يعمل التشغيل تلقائياً، اضغط زر التشغيل، أو استخدم أزرار التحميل أعلاه.</p>
+
+<script>
+  const v = document.getElementById('v'), p = document.getElementById('p');
+  p.addEventListener('click', () => { v.play(); p.classList.add('hide'); });
+  v.addEventListener('play', () => p.classList.add('hide'));
+  v.addEventListener('pause', () => { if (v.currentTime < v.duration) p.classList.remove('hide'); });
+  v.addEventListener('ended', () => p.classList.remove('hide'));
+  // graceful fallback if the CDN is unreachable
+  v.addEventListener('error', () => {
+    v.src = 'earth_sad_light.mp4';
+    v.load();
+  });
+</script>
+</body>
+</html>
